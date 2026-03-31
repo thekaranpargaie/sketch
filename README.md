@@ -1,6 +1,10 @@
 # Sketch
 
 **Design your architecture. Generate your scaffold. Skip the boilerplate.**
+<img width="1893" height="966" alt="image" src="https://github.com/user-attachments/assets/0cdb2341-81d1-4a84-87af-d0eabc610b35" />
+
+<img width="1916" height="1139" alt="image" src="https://github.com/user-attachments/assets/d6f6c733-7460-4ac6-a2fd-cfa073ff83f1" />
+
 
 Sketch is a visual, canvas-based scaffolding tool for .NET projects. You draw a system diagram — entities, protocols, and storage nodes — and Sketch generates a complete, buildable Clean Architecture solution as a `.zip` file ready to open in any IDE.
 
