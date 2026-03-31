@@ -1,0 +1,29 @@
+# Build stage — restore + publish
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Copy csproj files first for layer caching
+COPY Sketch.slnx .
+COPY Sketch.API/Sketch.API.csproj                         Sketch.API/
+COPY Sketch.Application/Sketch.Application.csproj         Sketch.Application/
+COPY Sketch.Domain/Sketch.Domain.csproj                   Sketch.Domain/
+COPY Sketch.Infrastructure/Sketch.Infrastructure.csproj   Sketch.Infrastructure/
+
+RUN dotnet restore Sketch.API/Sketch.API.csproj
+
+# Copy full source and publish
+COPY . .
+RUN dotnet publish Sketch.API/Sketch.API.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+EXPOSE 8080
+
+ENTRYPOINT ["dotnet", "Sketch.API.dll"]

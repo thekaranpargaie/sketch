@@ -1,0 +1,24 @@
+services:
+
+  # ── .NET 10 Generation API ────────────────────────────────────────────────
+  api:
+    build:
+      context: ./src          # solution root — all projects are under here
+      dockerfile: Dockerfile.api
+    ports:
+      - "5000:8080"           # host:5000 → container:8080 (ASP.NET Core default in Docker)
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: "8080"
+      # Allow requests originating from the web container (browser origin)
+      AllowedOrigins__0: "http://localhost:5173"
+
+  # ── React SPA (nginx) ─────────────────────────────────────────────────────
+  web:
+    build:
+      context: ./src/Sketch.Web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"             # host:5173 → nginx:80
+    depends_on:
+      - api

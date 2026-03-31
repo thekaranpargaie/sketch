@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="../tests/Sketch.UnitTests/Sketch.UnitTests.csproj" />
+  <Project Path="Sketch.API/Sketch.API.csproj" />
+  <Project Path="Sketch.Application/Sketch.Application.csproj" />
+  <Project Path="Sketch.Domain/Sketch.Domain.csproj" />
+  <Project Path="Sketch.Infrastructure/Sketch.Infrastructure.csproj" />
+</Solution>
